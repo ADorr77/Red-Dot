@@ -8,6 +8,10 @@
 #include<glad.h>
 #include<glfw3.h>
 #include<iostream>
+#include <chrono>
+#include <thread>
+
+typedef std::chrono::high_resolution_clock Clock;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
@@ -138,8 +142,13 @@ int main()
 	// generally unnesscary so generally won't unbind VAOs or VBOs if not nesscarry 
 	glBindVertexArray(0);
 
+	auto start = Clock::now();
+	auto end = Clock::now();
+	__int64 duration, period = __int64((1.0 / 60.0) * 1000000000);
+
 	while (!glfwWindowShouldClose(window))
 	{
+		start = Clock::now();
 		// input
 		glfwPollEvents();
 		processInput(window);
@@ -159,6 +168,10 @@ int main()
 
 		// swap buffer to show screen
 		glfwSwapBuffers(window);
+		end = Clock::now();
+		duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+		std::this_thread::sleep_for(std::chrono::nanoseconds(period - duration));
+		
 	}
 
 	glDeleteVertexArrays(1, &VAO);

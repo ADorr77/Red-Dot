@@ -1,6 +1,6 @@
 #include "TowerDefense.h"
 
-int** TowerDefense::get_map() const
+int ** TowerDefense::get_map() const
 {
 	return map;
 }
