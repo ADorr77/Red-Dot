@@ -123,7 +123,7 @@
   <ItemGroup>
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Tower.cpp" />
+    <ClCompile Include="Render.cpp" />
     <ClCompile Include="TowerDefense.cpp" />
   </ItemGroup>
   <ItemGroup>

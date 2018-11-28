@@ -27,9 +27,13 @@ public:
 
 	// get functions
 	int ** get_map() const;
-	const Hero& get_hero() const;
-	const std::vector<Monster>& get_monsters() const;
-	const std::vector<Projectile>& get_projectiles() const;
+	Hero& get_hero() const;
+	std::vector<Monster> get_monsters() const;
+	std::vector<Projectile> get_projectiles() const;
+
+	// map size varaibles 
+	const int height = 100;
+	const int width = 100;
 
 	// add other functionality as needed
 };
