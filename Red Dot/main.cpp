@@ -8,6 +8,8 @@
 #include<glad.h>
 #include<glfw3.h>
 #include<iostream>
+#include <chrono>
+#include <thread>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
@@ -132,14 +134,14 @@ int main()
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
-	// can unbind VBO after this because its bound to VAO
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	// can unbind VAO as well to avoid accidental modification 
-	// generally unnesscary so generally won't unbind VAOs or VBOs if not nesscarry 
-	glBindVertexArray(0);
+	unsigned long time = unsigned long((1.0 / 60.0) * 1000000000.0);
+	auto period = std::chrono::nanoseconds(time);
+
 
 	while (!glfwWindowShouldClose(window))
 	{
+		auto start = std::chrono::high_resolution_clock::now();
+
 		// input
 		glfwPollEvents();
 		processInput(window);
@@ -156,9 +158,12 @@ int main()
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 
-
 		// swap buffer to show screen
 		glfwSwapBuffers(window);
+
+		auto end  = std::chrono::high_resolution_clock::now();
+		auto sleep = period - (end - start);
+		std::this_thread::sleep_for(sleep);
 	}
 
 	glDeleteVertexArrays(1, &VAO);
