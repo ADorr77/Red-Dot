@@ -49,6 +49,10 @@ public:
 	std::vector<Tower> get_towers() const;
 	std::vector<Projectile> get_projectiles() const;
 
+	// const refrence varaibles
+	const int height = 20;
+	const int width = 15;
+
 	// add other functionality as needed
 	void add_money(int m);
 	int get_money() const;

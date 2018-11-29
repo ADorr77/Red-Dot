@@ -2,6 +2,7 @@
 #include "Maps.h"
 
 /*int TowerDefense::get_map() const
+int ** TowerDefense::get_map() const
 {
 	return map;
 }
